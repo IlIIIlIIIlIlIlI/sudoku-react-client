@@ -1,0 +1,11 @@
+$base-class: digit-input;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  &__input {
+    font-size: 40px;
+  }
+}
