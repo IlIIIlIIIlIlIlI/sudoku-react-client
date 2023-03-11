@@ -7,9 +7,19 @@ interface Props {
   autoFocus?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   onFocus: (value: string) => void;
+  setHorizontalIndex: (value: number) => void;
+  setVerticalIndex: (value: number) => void;
 }
 
-function Input({ name, autoFocus, onChange, value, onFocus }: Props) {
+function Input({
+  name,
+  autoFocus,
+  onChange,
+  value,
+  onFocus,
+  setHorizontalIndex,
+  setVerticalIndex,
+}: Props) {
   const input = useRef<any>(null);
 
   if (autoFocus === name) {
@@ -18,7 +28,11 @@ function Input({ name, autoFocus, onChange, value, onFocus }: Props) {
 
   return (
     <input
-      onFocus={() => onFocus(name)}
+      onFocus={() => {
+        onFocus(name);
+        setHorizontalIndex(Number(name.charAt(7)));
+        setVerticalIndex(Number(name.charAt(10)));
+      }}
       name={name}
       ref={input}
       className={`${scssObj.baseClass}__input`}

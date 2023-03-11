@@ -93,6 +93,8 @@ function Sudoku() {
           autoFocus={focus}
           onChange={formik.handleChange}
           onFocus={setFocus}
+          setHorizontalIndex={setHorizontalIndex}
+          setVerticalIndex={setVerticalIndex}
         />
       );
     }
