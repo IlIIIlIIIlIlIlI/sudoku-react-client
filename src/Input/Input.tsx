@@ -1,26 +1,30 @@
-import React, { InputHTMLAttributes, useRef } from 'react';
+import React, { useRef } from 'react';
 import scssObj from './_Input.scss';
 
 interface Props {
   name: string;
-  autoFocus?: number;
+  value: number | string;
+  autoFocus?: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onFocus: (value: string) => void;
 }
 
-function Input({ name, autoFocus }: Props) {
+function Input({ name, autoFocus, onChange, value, onFocus }: Props) {
   const input = useRef<any>(null);
 
-  if (autoFocus === Number(name)) {
+  if (autoFocus === name) {
     input?.current?.focus();
   }
 
   return (
     <input
+      onFocus={() => onFocus(name)}
       name={name}
       ref={input}
       className={`${scssObj.baseClass}__input`}
       type='text'
-      min={1}
-      max={9}
+      value={value}
+      onChange={onChange}
       onKeyPress={(event) => {
         if (
           !/[1-9]/.test(event.key) ||
