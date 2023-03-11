@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { InputHTMLAttributes, useRef } from 'react';
 import scssObj from './_Input.scss';
 
-function Input() {
+interface Props {
+  name: string;
+  autoFocus?: number;
+}
+
+function Input({ name, autoFocus }: Props) {
+  const input = useRef<any>(null);
+
+  if (autoFocus === Number(name)) {
+    input?.current?.focus();
+  }
+
   return (
     <input
-      autoFocus={false}
+      name={name}
+      ref={input}
       className={`${scssObj.baseClass}__input`}
       type='text'
       min={1}
