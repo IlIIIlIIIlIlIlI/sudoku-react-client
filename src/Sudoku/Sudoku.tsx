@@ -9,6 +9,8 @@ function Sudoku() {
   return (
     <div>
       <Input />
+      <Input />
+      <Input />
     </div>
   );
 }

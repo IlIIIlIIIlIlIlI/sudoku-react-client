@@ -7,5 +7,13 @@ $base-class: digit-input;
 .#{$base-class} {
   &__input {
     font-size: 40px;
+    width: 45px;
+    outline: none;
+    text-align: center;
+    caret-color: transparent;
+  }
+
+  &__input:focus {
+    background: #eeeeee;
   }
 }
