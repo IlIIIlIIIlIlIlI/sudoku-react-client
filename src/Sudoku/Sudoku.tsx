@@ -13,7 +13,7 @@ function Sudoku() {
   const [focus, setFocus] = useState(0);
   axios
     .get('https://sudoku-puzzle-9x9-presolved-production.up.railway.app/sudoku')
-    .then((value) => console.log('value', value));
+    .then();
 
   useEffect(() => {
     const keyDownHandler = (event: any) => {
