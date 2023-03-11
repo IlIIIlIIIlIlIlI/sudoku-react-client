@@ -11,12 +11,11 @@ const arrowButtonsEventKey = [
 ];
 
 function Sudoku() {
-  const [horizontalIndex, setHorizontalIndex] = useState<number>(8);
-  const [verticalIndex, setVerticalIndex] = useState<number>(8);
+  const [horizontalIndex, setHorizontalIndex] = useState<number>(0);
+  const [verticalIndex, setVerticalIndex] = useState<number>(0);
   const [focus, setFocus] = useState(
     `matrix[${horizontalIndex}][${verticalIndex}]`
   );
-
   axios
     .get('https://sudoku-puzzle-9x9-presolved-production.up.railway.app/sudoku')
     .then();
@@ -87,7 +86,6 @@ function Sudoku() {
     for (let j = 0; j < 9; j++) {
       temp.push(
         <Input
-          key={`${i}${j}${Math.random()}`}
           xindex={i}
           yindex={j}
           name={`matrix[${i}][${j}]`}
