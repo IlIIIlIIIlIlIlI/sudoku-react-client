@@ -1,8 +1,11 @@
 import React, { useRef } from 'react';
 import scssObj from './_Input.scss';
+import classnames from 'classnames';
 
 interface Props {
   name: string;
+  xindex: number;
+  yindex: number;
   value: number | string;
   autoFocus?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
@@ -13,6 +16,8 @@ interface Props {
 
 function Input({
   name,
+  xindex,
+  yindex,
   autoFocus,
   onChange,
   value,
@@ -21,6 +26,11 @@ function Input({
   setVerticalIndex,
 }: Props) {
   const input = useRef<any>(null);
+
+  const cls = classnames(`${scssObj.baseClass}__input`, {
+    [`${scssObj.baseClass}__side-margin`]: (yindex + 1) % 3 === 0,
+    [`${scssObj.baseClass}__bottom-margin`]: (xindex + 1) % 3 === 0,
+  });
 
   if (autoFocus === name) {
     input?.current?.focus();
@@ -35,7 +45,7 @@ function Input({
       }}
       name={name}
       ref={input}
-      className={`${scssObj.baseClass}__input`}
+      className={cls}
       type='text'
       value={value}
       onChange={onChange}

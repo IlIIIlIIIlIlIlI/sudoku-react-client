@@ -16,4 +16,12 @@ $base-class: digit-input;
   &__input:focus {
     background: #eeeeee;
   }
+
+  &__side-margin {
+    margin-right: 5px;
+  }
+
+  &__bottom-margin {
+    margin-bottom: 5px;
+  }
 }

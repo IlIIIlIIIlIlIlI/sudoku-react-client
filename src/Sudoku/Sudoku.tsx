@@ -88,6 +88,8 @@ function Sudoku() {
       temp.push(
         <Input
           key={`${i}${j}${Math.random()}`}
+          xindex={i}
+          yindex={j}
           name={`matrix[${i}][${j}]`}
           value={formik.values.matrix[i][j]}
           autoFocus={focus}
