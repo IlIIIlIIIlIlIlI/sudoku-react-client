@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import Input from '../Input';
+import { useDispatch } from 'react-redux/es/exports';
+import { getPuzzle, getSolution } from '../Redux';
 
 const arrowButtonsEventKey = [
   'ArrowUp',
@@ -11,14 +13,27 @@ const arrowButtonsEventKey = [
 ];
 
 function Sudoku() {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
   const [horizontalIndex, setHorizontalIndex] = useState<number>(0);
   const [verticalIndex, setVerticalIndex] = useState<number>(0);
   const [focus, setFocus] = useState(
     `matrix[${horizontalIndex}][${verticalIndex}]`
   );
-  axios
-    .get('https://sudoku-puzzle-9x9-presolved-production.up.railway.app/sudoku')
-    .then();
+
+  const puzzleAndSolutionPromise = axios
+    .get<number[][][]>(
+      'https://sudoku-puzzle-9x9-presolved-production.up.railway.app/sudoku'
+    )
+    .then((response) => {
+      setIsLoading(false);
+      dispatch(getPuzzle({ matrix9x9: response.data[0] }));
+      dispatch(getSolution({ matrix9x9: response.data[1] }));
+      return response.data;
+    })
+    .catch(() => {
+      setIsLoading(false);
+    });
 
   useEffect(() => {
     const keyDownHandler = (event: any) => {
@@ -78,6 +93,8 @@ function Sudoku() {
     },
     onSubmit: () => {},
   });
+
+  if (isLoading) return <div>Loading</div>;
 
   const inputMatrix = [];
 
