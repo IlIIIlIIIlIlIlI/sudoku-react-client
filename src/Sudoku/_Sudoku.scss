@@ -18,7 +18,7 @@ $base-class: sudoku-canvas;
   &__referrence {
     position: absolute;
     bottom: 20px;
-    font-size: 30px;
+    font-size: 20px;
     font-family: sans-serif;
   }
 
@@ -26,5 +26,12 @@ $base-class: sudoku-canvas;
     font-size: 35px;
     font-family: sans-serif;
     margin-bottom: 30px;
+  }
+
+  &__loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: calc(50vh - 75px);
   }
 }

@@ -5,6 +5,7 @@ import { getPuzzle, getSolution } from '../Redux';
 import { selectPuzzle } from '../Redux/Selector';
 import SudokuCanvas from '../SudokuCanvas';
 import scssObj from './_Sudoku.scss';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const arrowButtonsEventKey = [
   'ArrowUp',
@@ -83,7 +84,12 @@ function Sudoku() {
     };
   }, [focus, horizontalIndex, verticalIndex]);
 
-  if (selectedPuzzle.length === 0) return <div>Loading</div>;
+  if (selectedPuzzle.length === 0)
+    return (
+      <div className={`${scssObj.baseClass}__loader`}>
+        <CircularProgress size={150} />
+      </div>
+    );
 
   return (
     <div className={`${scssObj.baseClass}__container`}>
