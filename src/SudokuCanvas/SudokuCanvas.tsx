@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
 import Input from '../Input';
 import { checkIfAllErrorsAreResolved, checkIfAllNumbersFilled } from './utils';
 import Dialog from '@mui/material/Dialog';

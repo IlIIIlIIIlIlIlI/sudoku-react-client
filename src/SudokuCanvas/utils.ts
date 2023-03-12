@@ -1,5 +1,3 @@
-import { element } from 'prop-types';
-
 export const checkIfAllNumbersFilled = (matrix: number[][]) => {
   for (let i = 0; i < 9; i++) {
     const rowContent = new Set<number>(
