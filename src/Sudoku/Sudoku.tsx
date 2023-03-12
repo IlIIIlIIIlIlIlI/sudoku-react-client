@@ -17,6 +17,9 @@ function Sudoku() {
   const dispatch = useDispatch();
   const selectedPuzzle = useSelector(selectPuzzle);
   const selectedSolution = useSelector(selectSolution);
+  console.log('selectedPuzzle', selectedPuzzle);
+  console.log('selectedSolution', selectedSolution);
+
   const [isLoading, setIsLoading] = useState(true);
   const [horizontalIndex, setHorizontalIndex] = useState<number>(0);
   const [verticalIndex, setVerticalIndex] = useState<number>(0);
@@ -24,19 +27,21 @@ function Sudoku() {
     `matrix[${horizontalIndex}][${verticalIndex}]`
   );
 
-  const puzzleAndSolutionPromise = axios
-    .get<number[][][]>(
-      'https://sudoku-puzzle-9x9-presolved-production.up.railway.app/sudoku'
-    )
-    .then((response) => {
-      setIsLoading(false);
-      dispatch(getPuzzle({ matrix9x9: response.data[0] }));
-      dispatch(getSolution({ matrix9x9: response.data[1] }));
-      return response.data;
-    })
-    .catch(() => {
-      setIsLoading(false);
-    });
+  if (isLoading) {
+    axios
+      .get<number[][][]>(
+        'https://sudoku-puzzle-9x9-presolved-production.up.railway.app/sudoku'
+      )
+      .then((response) => {
+        setIsLoading(false);
+        dispatch(getPuzzle({ matrix9x9: response.data[1] }));
+        dispatch(getSolution({ matrix9x9: response.data[0] }));
+        return response.data;
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
+  }
 
   useEffect(() => {
     const keyDownHandler = (event: any) => {
