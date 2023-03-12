@@ -39,10 +39,6 @@ function SudokuCanvas({
 }: Props) {
   const [open, setOpen] = useState(false);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const formik = useFormik({
     initialValues: {
       matrix: selectedPuzzle,
@@ -146,7 +142,6 @@ function SudokuCanvas({
         open={open}
         TransitionComponent={Transition}
         keepMounted
-        onClose={handleClose}
         aria-describedby='alert-dialog-slide-description'
       >
         <div className={`${scssObj.baseClass}__container`}>
