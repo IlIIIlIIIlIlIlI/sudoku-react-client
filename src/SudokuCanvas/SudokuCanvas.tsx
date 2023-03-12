@@ -19,6 +19,9 @@ function SudokuCanvas({
     initialValues: {
       matrix: selectedPuzzle,
     },
+    validate(values) {
+      let errors = {};
+    },
     onSubmit: () => {},
   });
 
@@ -47,7 +50,14 @@ function SudokuCanvas({
 
     inputMatrix.push(<div>{temp}</div>);
   }
-  return <form onSubmit={formik.handleSubmit}>{inputMatrix}</form>;
+  return (
+    <form
+      autoComplete='off'
+      onSubmit={formik.handleSubmit}
+    >
+      {inputMatrix}
+    </form>
+  );
 }
 
 export default SudokuCanvas;

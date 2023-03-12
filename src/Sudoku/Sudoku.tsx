@@ -18,8 +18,6 @@ function Sudoku() {
   const dispatch = useDispatch();
   const selectedPuzzle = useSelector(selectPuzzle);
   const selectedSolution = useSelector(selectSolution);
-  console.log('selectedPuzzle', selectedPuzzle);
-  console.log('selectedSolution', selectedSolution);
 
   const [isLoading, setIsLoading] = useState(true);
   const [horizontalIndex, setHorizontalIndex] = useState<number>(0);
