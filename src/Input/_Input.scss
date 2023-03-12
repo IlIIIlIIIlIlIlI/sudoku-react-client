@@ -17,6 +17,10 @@ $base-class: digit-input;
     background: #eeeeee;
   }
 
+  &__input:disabled {
+    background: #d0d6f5;
+  }
+
   &__side-margin {
     margin-right: 5px;
   }

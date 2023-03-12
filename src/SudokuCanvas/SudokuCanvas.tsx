@@ -35,6 +35,7 @@ function SudokuCanvas({
           value={
             formik.values.matrix?.[i]?.[j] ? formik.values.matrix[i][j] : ''
           }
+          disabled={!!selectedPuzzle[i][j]}
           autoFocus={autoFocus}
           onChange={formik.handleChange}
           onFocus={onFocus}

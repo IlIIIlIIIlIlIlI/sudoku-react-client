@@ -12,6 +12,7 @@ interface Props {
   onFocus: (value: string) => void;
   setHorizontalIndex: (value: number) => void;
   setVerticalIndex: (value: number) => void;
+  disabled?: boolean;
 }
 
 function Input({
@@ -24,6 +25,7 @@ function Input({
   onFocus,
   setHorizontalIndex,
   setVerticalIndex,
+  disabled,
 }: Props) {
   const input = useRef<any>(null);
 
@@ -38,6 +40,7 @@ function Input({
 
   return (
     <input
+      disabled={disabled}
       onFocus={() => {
         onFocus(name);
         setHorizontalIndex(Number(name.charAt(7)));
