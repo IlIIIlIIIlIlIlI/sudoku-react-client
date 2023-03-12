@@ -28,6 +28,7 @@ function Sudoku() {
   );
 
   if (isLoading) {
+    setIsLoading(false);
     axios
       .get<number[][][]>(
         'https://sudoku-puzzle-9x9-presolved-production.up.railway.app/sudoku'
@@ -87,22 +88,12 @@ function Sudoku() {
 
   const formik = useFormik({
     initialValues: {
-      matrix: [
-        ['', '', '', '', '', '', '', '', ''],
-        ['', '', '', '', '', '', '', '', ''],
-        ['', '', '', '', '', '', '', '', ''],
-        ['', '', '', '', '', '', '', '', ''],
-        ['', '', '', '', '', '', '', '', ''],
-        ['', '', '', '', '', '', '', '', ''],
-        ['', '', '', '', '', '', '', '', ''],
-        ['', '', '', '', '', '', '', '', ''],
-        ['', '', '', '', '', '', '', '', ''],
-      ],
+      matrix: selectedPuzzle,
     },
     onSubmit: () => {},
   });
 
-  if (isLoading) return <div>Loading</div>;
+  if (selectedPuzzle.length === 0) return <div>Loading</div>;
 
   const inputMatrix = [];
 
@@ -114,7 +105,9 @@ function Sudoku() {
           xindex={i}
           yindex={j}
           name={`matrix[${i}][${j}]`}
-          value={formik.values.matrix[i][j]}
+          value={
+            formik.values.matrix?.[i]?.[j] ? formik.values.matrix[i][j] : ''
+          }
           autoFocus={focus}
           onChange={formik.handleChange}
           onFocus={setFocus}
