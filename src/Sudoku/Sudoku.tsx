@@ -103,7 +103,7 @@ function Sudoku() {
       />
 
       <div className={`${scssObj.baseClass}__referrence`}>
-        Made with <span className={`${scssObj.baseClass}__heart`}>❤</span> from
+        Made with <span className={`${scssObj.baseClass}__heart`}>❤</span> by
         Suraj
       </div>
     </div>
