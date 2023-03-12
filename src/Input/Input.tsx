@@ -46,7 +46,7 @@ function Input({
       Number(value) !== Number(elementAtFocusedInput),
     [`${scssObj.baseClass}__error`]: errored,
     [`${scssObj.baseClass}__focused_element`]:
-      value !== '' ? Number(value) === Number(elementAtFocusedInput) : false,
+      value !== '' && Number(value) === Number(elementAtFocusedInput),
   });
 
   if (autoFocus === name) {
