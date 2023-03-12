@@ -50,10 +50,12 @@ function Input({
       value={value}
       onChange={onChange}
       onKeyPress={(event) => {
+        // console.log('event.key before', event.key);
         if (
           !/[1-9]/.test(event.key) ||
           Number((event.target as HTMLInputElement).value) > 0
         ) {
+          // console.log('prevented');
           event.preventDefault();
         }
       }}
