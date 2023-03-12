@@ -37,8 +37,6 @@ function SudokuCanvas({
   setHorizontalIndex,
   setVerticalIndex,
 }: Props) {
-  const [open, setOpen] = useState(false);
-
   const formik = useFormik({
     initialValues: {
       matrix: selectedPuzzle,
@@ -130,16 +128,13 @@ function SudokuCanvas({
     inputMatrix.push(<div>{temp}</div>);
   }
 
-  if (
-    checkIfAllNumbersFilled(formik.values.matrix) &&
-    checkIfAllErrorsAreResolved(formik?.errors?.matrix)
-  ) {
-    setOpen(true);
-  }
   return (
     <>
       <Dialog
-        open={open}
+        open={
+          checkIfAllNumbersFilled(formik.values.matrix) &&
+          checkIfAllErrorsAreResolved(formik?.errors?.matrix)
+        }
         TransitionComponent={Transition}
         keepMounted
         aria-describedby='alert-dialog-slide-description'
