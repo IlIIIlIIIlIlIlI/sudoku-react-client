@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { getPuzzle, getSolution } from '../Redux';
 import { selectPuzzle } from '../Redux/Selector';
 import SudokuCanvas from '../SudokuCanvas';
+import scssObj from './_Sudoku.scss';
 
 const arrowButtonsEventKey = [
   'ArrowUp',
@@ -85,13 +86,21 @@ function Sudoku() {
   if (selectedPuzzle.length === 0) return <div>Loading</div>;
 
   return (
-    <SudokuCanvas
-      selectedPuzzle={selectedPuzzle}
-      autoFocus={focus}
-      onFocus={setFocus}
-      setHorizontalIndex={setHorizontalIndex}
-      setVerticalIndex={setVerticalIndex}
-    />
+    <div className={`${scssObj.baseClass}__container`}>
+      <div className={`${scssObj.baseClass}__title`}>Sudoku Puzzle</div>
+      <SudokuCanvas
+        selectedPuzzle={selectedPuzzle}
+        autoFocus={focus}
+        onFocus={setFocus}
+        setHorizontalIndex={setHorizontalIndex}
+        setVerticalIndex={setVerticalIndex}
+      />
+
+      <div className={`${scssObj.baseClass}__referrence`}>
+        Made with <span className={`${scssObj.baseClass}__heart`}>❤</span> from
+        Suraj
+      </div>
+    </div>
   );
 }
 

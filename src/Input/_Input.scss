@@ -5,6 +5,13 @@ $base-class: digit-input;
 }
 
 .#{$base-class} {
+  @media screen and (max-width: 668px) {
+    &__input {
+      font-size: 20px !important;
+      width: 20px !important;
+    }
+  }
+
   &__input {
     font-size: 40px;
     width: 45px;
