@@ -40,7 +40,10 @@ function Input({
     [`${scssObj.baseClass}__side-margin`]: (yindex + 1) % 3 === 0,
     [`${scssObj.baseClass}__bottom-margin`]: (xindex + 1) % 3 === 0,
     [`${scssObj.baseClass}__focused`]: autoFocus === name,
-    [`${scssObj.baseClass}__disabled`]: disabled,
+    [`${scssObj.baseClass}__disabled`]:
+      disabled &&
+      value !== '' &&
+      Number(value) !== Number(elementAtFocusedInput),
     [`${scssObj.baseClass}__error`]: errored,
     [`${scssObj.baseClass}__focused_element`]:
       value !== '' ? Number(value) === Number(elementAtFocusedInput) : false,
