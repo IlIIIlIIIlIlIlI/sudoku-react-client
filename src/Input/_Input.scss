@@ -13,12 +13,16 @@ $base-class: digit-input;
     caret-color: transparent;
   }
 
-  &__input:focus {
+  &__focused {
     background: #eeeeee;
   }
 
-  &__input:disabled {
-    background: #d0d6f5;
+  &__disabled {
+    background: #d0d6f5 !important;
+  }
+
+  &__error {
+    background: rgb(247, 229, 229);
   }
 
   &__side-margin {

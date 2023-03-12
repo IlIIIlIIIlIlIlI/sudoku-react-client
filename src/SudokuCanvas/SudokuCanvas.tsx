@@ -20,10 +20,91 @@ function SudokuCanvas({
       matrix: selectedPuzzle,
     },
     validate(values) {
-      let errors = {};
+      let errors: Partial<{
+        matrix: boolean[][];
+      }> = {};
+
+      const matrixError = [
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false],
+      ];
+
+      for (let i = 0; i < 9; i++) {
+        const rowContent: number[] = [];
+        values.matrix[i].forEach((element) => {
+          if (Number(element) > 0) {
+            rowContent.push(Number(element));
+          }
+        });
+
+        const rowContentSet = new Set<number>(Array.from(rowContent));
+
+        if (rowContent.length !== rowContentSet.size) {
+          for (let j = 0; j < 9; j++) {
+            matrixError[i][j] = true;
+          }
+        }
+      }
+
+      for (let j = 0; j < 9; j++) {
+        const columnContent: number[] = [];
+
+        for (let k = 0; k < 9; k++) {
+          const currentElement = values.matrix[k][j];
+          if (Number(currentElement) > 0) {
+            columnContent.push(Number(currentElement));
+          }
+        }
+
+        const columnContentSet = new Set<number>(Array.from(columnContent));
+
+        if (columnContent.length !== columnContentSet.size) {
+          for (let i = 0; i < 9; i++) {
+            matrixError[i][j] = true;
+          }
+        }
+      }
+
+      for (let i = 0; i < 9; i += 3) {
+        for (let j = 0; j < 9; j += 3) {
+          const matrixContent: number[] = [];
+
+          for (let m = i; m < i + 3; m++) {
+            for (let l = j; m < j + 3; l++) {
+              const currentElement = values.matrix[m][l];
+              if (Number(currentElement) > 0) {
+                matrixContent.push(Number(currentElement));
+              }
+            }
+          }
+
+          const matrixContentSet = new Set(Array.from(matrixContent));
+
+          if (matrixContent.length !== matrixContentSet.size) {
+            for (let m = i; m < i + 3; m++) {
+              for (let l = j; m < j + 3; l++) {
+                matrixError[m][l] = true;
+              }
+            }
+          }
+        }
+      }
+
+      errors.matrix = matrixError;
+
+      return errors;
     },
     onSubmit: () => {},
   });
+
+  console.log('formik.errors', formik.errors);
 
   const inputMatrix = [];
 
@@ -38,6 +119,7 @@ function SudokuCanvas({
           value={
             formik.values.matrix?.[i]?.[j] ? formik.values.matrix[i][j] : ''
           }
+          errored={!!formik?.errors?.matrix?.[i][j]}
           disabled={!!selectedPuzzle[i][j]}
           autoFocus={autoFocus}
           onChange={formik.handleChange}

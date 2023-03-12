@@ -6,6 +6,7 @@ interface Props {
   name: string;
   xindex: number;
   yindex: number;
+  errored?: boolean;
   value: number | string;
   autoFocus?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
@@ -19,6 +20,7 @@ function Input({
   name,
   xindex,
   yindex,
+  errored,
   autoFocus,
   onChange,
   value,
@@ -32,6 +34,9 @@ function Input({
   const cls = classnames(`${scssObj.baseClass}__input`, {
     [`${scssObj.baseClass}__side-margin`]: (yindex + 1) % 3 === 0,
     [`${scssObj.baseClass}__bottom-margin`]: (xindex + 1) % 3 === 0,
+    [`${scssObj.baseClass}__focused`]: autoFocus === name,
+    [`${scssObj.baseClass}__disabled`]: disabled,
+    [`${scssObj.baseClass}__error`]: errored,
   });
 
   if (autoFocus === name) {
