@@ -25,6 +25,10 @@ $base-class: digit-input;
     background: rgb(247, 229, 229);
   }
 
+  &__focused_element {
+    background-color: rgb(243, 236, 197);
+  }
+
   &__side-margin {
     margin-right: 5px;
   }

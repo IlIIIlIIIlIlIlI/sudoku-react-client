@@ -1,6 +1,9 @@
 import React, { useRef } from 'react';
 import scssObj from './_Input.scss';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
 import classnames from 'classnames';
+import { selectElementAtFocusedElement } from '../Redux/Selector';
+import { getElementAtFocusedInput } from '../Redux';
 
 interface Props {
   name: string;
@@ -29,6 +32,8 @@ function Input({
   setVerticalIndex,
   disabled,
 }: Props) {
+  const elementAtFocusedInput = useSelector(selectElementAtFocusedElement);
+  const dispatch = useDispatch();
   const input = useRef<any>(null);
 
   const cls = classnames(`${scssObj.baseClass}__input`, {
@@ -37,9 +42,12 @@ function Input({
     [`${scssObj.baseClass}__focused`]: autoFocus === name,
     [`${scssObj.baseClass}__disabled`]: disabled,
     [`${scssObj.baseClass}__error`]: errored,
+    [`${scssObj.baseClass}__focused_element`]:
+      value !== '' ? Number(value) === Number(elementAtFocusedInput) : false,
   });
 
   if (autoFocus === name) {
+    dispatch(getElementAtFocusedInput({ focused: value }));
     input?.current?.focus();
   }
 

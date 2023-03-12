@@ -7,3 +7,6 @@ export const selectPuzzle = (state: SudokuSuperState) =>
 
 export const selectSolution = (state: SudokuSuperState) =>
   selectSudokuState(state).solution;
+
+export const selectElementAtFocusedElement = (state: SudokuSuperState) =>
+  selectSudokuState(state).focusedValue;
