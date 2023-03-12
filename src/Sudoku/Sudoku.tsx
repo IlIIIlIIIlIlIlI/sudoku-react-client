@@ -5,6 +5,7 @@ import Input from '../Input';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { getPuzzle, getSolution } from '../Redux';
 import { selectPuzzle, selectSolution } from '../Redux/Selector';
+import SudokuCanvas from '../SudokuCanvas';
 
 const arrowButtonsEventKey = [
   'ArrowUp',
@@ -86,41 +87,17 @@ function Sudoku() {
     };
   }, [focus, horizontalIndex, verticalIndex]);
 
-  const formik = useFormik({
-    initialValues: {
-      matrix: selectedPuzzle,
-    },
-    onSubmit: () => {},
-  });
-
   if (selectedPuzzle.length === 0) return <div>Loading</div>;
 
-  const inputMatrix = [];
-
-  for (let i = 0; i < 9; i++) {
-    const temp = [];
-    for (let j = 0; j < 9; j++) {
-      temp.push(
-        <Input
-          xindex={i}
-          yindex={j}
-          name={`matrix[${i}][${j}]`}
-          value={
-            formik.values.matrix?.[i]?.[j] ? formik.values.matrix[i][j] : ''
-          }
-          autoFocus={focus}
-          onChange={formik.handleChange}
-          onFocus={setFocus}
-          setHorizontalIndex={setHorizontalIndex}
-          setVerticalIndex={setVerticalIndex}
-        />
-      );
-    }
-
-    inputMatrix.push(<div>{temp}</div>);
-  }
-
-  return <form onSubmit={formik.handleSubmit}>{inputMatrix}</form>;
+  return (
+    <SudokuCanvas
+      selectedPuzzle={selectedPuzzle}
+      autoFocus={focus}
+      onFocus={setFocus}
+      setHorizontalIndex={setHorizontalIndex}
+      setVerticalIndex={setVerticalIndex}
+    />
+  );
 }
 
 export default Sudoku;
