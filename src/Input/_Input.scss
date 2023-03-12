@@ -21,11 +21,12 @@ $base-class: digit-input;
   }
 
   &__focused {
-    background: #c2e9aa;
+    background: #c2e9aa !important;
+    color: black !important;
   }
 
   &__disabled {
-    background: #d0d6f5 !important;
+    background: #d0d6f5;
   }
 
   &__error {
@@ -34,6 +35,11 @@ $base-class: digit-input;
 
   &__focused_element {
     background-color: rgb(243, 236, 197);
+  }
+
+  &__focused_element-disabled {
+    background-color: rgb(171, 167, 167);
+    color: white;
   }
 
   &__side-margin {

@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import Input from '../Input';
+import { checkIfAllErrorsAreResolved, checkIfAllNumbersFilled } from './utils';
 interface Props {
   selectedPuzzle: number[][];
   autoFocus?: string;
@@ -106,12 +107,19 @@ function SudokuCanvas({
     inputMatrix.push(<div>{temp}</div>);
   }
   return (
-    <form
-      autoComplete='off'
-      onSubmit={formik.handleSubmit}
-    >
-      {inputMatrix}
-    </form>
+    <>
+      {checkIfAllNumbersFilled(formik.values.matrix) &&
+      checkIfAllErrorsAreResolved(formik?.errors?.matrix) ? (
+        <div>Solved</div>
+      ) : (
+        <form
+          autoComplete='off'
+          onSubmit={formik.handleSubmit}
+        >
+          {inputMatrix}
+        </form>
+      )}
+    </>
   );
 }
 

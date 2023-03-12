@@ -47,6 +47,10 @@ function Input({
     [`${scssObj.baseClass}__error`]: errored,
     [`${scssObj.baseClass}__focused_element`]:
       value !== '' && Number(value) === Number(elementAtFocusedInput),
+    [`${scssObj.baseClass}__focused_element-disabled`]:
+      value !== '' &&
+      Number(value) === Number(elementAtFocusedInput) &&
+      disabled,
   });
 
   if (autoFocus === name) {
