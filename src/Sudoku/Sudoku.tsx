@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import Input from '../Input';
-import { useDispatch } from 'react-redux/es/exports';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { getPuzzle, getSolution } from '../Redux';
+import { selectPuzzle, selectSolution } from '../Redux/Selector';
 
 const arrowButtonsEventKey = [
   'ArrowUp',
@@ -14,6 +15,8 @@ const arrowButtonsEventKey = [
 
 function Sudoku() {
   const dispatch = useDispatch();
+  const selectedPuzzle = useSelector(selectPuzzle);
+  const selectedSolution = useSelector(selectSolution);
   const [isLoading, setIsLoading] = useState(true);
   const [horizontalIndex, setHorizontalIndex] = useState<number>(0);
   const [verticalIndex, setVerticalIndex] = useState<number>(0);
