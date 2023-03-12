@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { getPuzzle, getSolution } from '../Redux';
-import { selectPuzzle, selectSolution } from '../Redux/Selector';
+import { selectPuzzle } from '../Redux/Selector';
 import SudokuCanvas from '../SudokuCanvas';
 
 const arrowButtonsEventKey = [

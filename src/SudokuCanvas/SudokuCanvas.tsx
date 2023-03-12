@@ -72,31 +72,6 @@ function SudokuCanvas({
         }
       }
 
-      for (let i = 0; i < 9; i += 3) {
-        for (let j = 0; j < 9; j += 3) {
-          const matrixContent: number[] = [];
-
-          for (let m = i; m < i + 3; m++) {
-            for (let l = j; m < j + 3; l++) {
-              const currentElement = values.matrix[m][l];
-              if (Number(currentElement) > 0) {
-                matrixContent.push(Number(currentElement));
-              }
-            }
-          }
-
-          const matrixContentSet = new Set(Array.from(matrixContent));
-
-          if (matrixContent.length !== matrixContentSet.size) {
-            for (let m = i; m < i + 3; m++) {
-              for (let l = j; m < j + 3; l++) {
-                matrixError[m][l] = true;
-              }
-            }
-          }
-        }
-      }
-
       errors.matrix = matrixError;
 
       return errors;
