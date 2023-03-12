@@ -108,7 +108,17 @@ function Sudoku() {
         Made with <span className={`${scssObj.baseClass}__heart`}>❤</span> by
         Suraj
         <div className={`${scssObj.baseClass}__button-container`}>
-          <Button className={`${scssObj.baseClass}__github-button`}>
+          <Button
+            className={`${scssObj.baseClass}__github-button`}
+            role='link'
+            onClick={() => {
+              window.open(
+                'https://github.com/IlIIIlIIIlIlIlI/sudoku-react-client',
+                '_blank',
+                'noreferrer'
+              );
+            }}
+          >
             <FaGithub />
           </Button>
         </div>
