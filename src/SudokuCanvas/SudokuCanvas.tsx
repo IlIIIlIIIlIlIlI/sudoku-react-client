@@ -1,7 +1,28 @@
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import Input from '../Input';
 import { checkIfAllErrorsAreResolved, checkIfAllNumbersFilled } from './utils';
+import Dialog from '@mui/material/Dialog';
+import { TransitionProps } from '@mui/material/transitions';
+import Slide from '@mui/material/Slide';
+import scssObj from './_SudokuCanvas.scss';
+import Button from '@mui/material/Button';
+
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>
+) {
+  return (
+    <Slide
+      direction='up'
+      ref={ref}
+      {...props}
+    />
+  );
+});
+
 interface Props {
   selectedPuzzle: number[][];
   autoFocus?: string;
@@ -16,6 +37,12 @@ function SudokuCanvas({
   setHorizontalIndex,
   setVerticalIndex,
 }: Props) {
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const formik = useFormik({
     initialValues: {
       matrix: selectedPuzzle,
@@ -106,19 +133,45 @@ function SudokuCanvas({
 
     inputMatrix.push(<div>{temp}</div>);
   }
+
+  if (
+    checkIfAllNumbersFilled(formik.values.matrix) &&
+    checkIfAllErrorsAreResolved(formik?.errors?.matrix)
+  ) {
+    setOpen(true);
+  }
   return (
     <>
-      {checkIfAllNumbersFilled(formik.values.matrix) &&
-      checkIfAllErrorsAreResolved(formik?.errors?.matrix) ? (
-        <div>Solved</div>
-      ) : (
-        <form
-          autoComplete='off'
-          onSubmit={formik.handleSubmit}
-        >
-          {inputMatrix}
-        </form>
-      )}
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby='alert-dialog-slide-description'
+      >
+        <div className={`${scssObj.baseClass}__container`}>
+          <div className={`${scssObj.baseClass}__title`}>
+            <span className={`${scssObj.baseClass}__rotate`}>🎉</span>
+            Congratulations<span>🎉</span>
+          </div>
+          <div className={`${scssObj.baseClass}__mystery`}>Mystery Solved</div>
+          <Button
+            variant='contained'
+            className={`${scssObj.baseClass}__button`}
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            Try once again
+          </Button>
+        </div>
+      </Dialog>
+      <form
+        autoComplete='off'
+        onSubmit={formik.handleSubmit}
+      >
+        {inputMatrix}
+      </form>
     </>
   );
 }
