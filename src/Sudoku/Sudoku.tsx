@@ -6,6 +6,8 @@ import { selectPuzzle } from '../Redux/Selector';
 import SudokuCanvas from '../SudokuCanvas';
 import scssObj from './_Sudoku.scss';
 import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
+import { FaGithub } from 'react-icons/fa';
 
 const arrowButtonsEventKey = [
   'ArrowUp',
@@ -105,6 +107,11 @@ function Sudoku() {
       <div className={`${scssObj.baseClass}__referrence`}>
         Made with <span className={`${scssObj.baseClass}__heart`}>❤</span> by
         Suraj
+        <div className={`${scssObj.baseClass}__button-container`}>
+          <Button className={`${scssObj.baseClass}__github-button`}>
+            <FaGithub />
+          </Button>
+        </div>
       </div>
     </div>
   );
