@@ -79,8 +79,6 @@ function SudokuCanvas({
     onSubmit: () => {},
   });
 
-  console.log('formik.errors', formik.errors);
-
   const inputMatrix = [];
 
   for (let i = 0; i < 9; i++) {
