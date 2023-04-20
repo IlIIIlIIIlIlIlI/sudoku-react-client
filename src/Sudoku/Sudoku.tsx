@@ -31,7 +31,7 @@ function Sudoku() {
     setIsLoading(false);
     axios
       .get<number[][][]>(
-        'https://sudoku-puzzle-9x9-presolved-production.up.railway.app/sudoku'
+        'https://sudoku-puzzle-9x9-presolved-production-e691.up.railway.app/sudoku'
       )
       .then((response) => {
         setIsLoading(false);
