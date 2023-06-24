@@ -1,7 +1,7 @@
 import produce from 'immer';
 import { createReducer } from 'typesafe-actions';
 import { ReduxActionType, Sudoku } from './types';
-import { setMatrix, setPuzzleMatrix, toggleLoadingSpinner } from './Actions';
+import { setMatrix, setPuzzleMatrix, toggleLoadingSpinner } from './actions';
 import { createBlankMatrix } from '../Utility/SudokuUtils';
 
 const initialState: Sudoku = {

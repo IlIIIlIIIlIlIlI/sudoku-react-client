@@ -19,7 +19,7 @@ import {
   startSolvingDiagonalMatrices,
   startSolvingMatrixFromScrach,
   toggleLoadingSpinner,
-} from './Actions';
+} from './actions';
 import {
   calculateNonDiagonalMatrix,
   createOnlyDiagonalMatrices,

@@ -11,7 +11,7 @@ import {
   toggleLoadingSpinner,
   startSolvingDiagonalMatrices,
   setPuzzleMatrix,
-} from './Actions';
+} from './actions';
 
 export type Sudoku = {
   puzzleMatrix: number[][];

@@ -12,9 +12,9 @@ import { FaGithub } from 'react-icons/fa';
 import {
   selectIsSudokuBeingCalculated,
   selectPuzzleMatrix,
-} from '../NewRedux/selector';
+} from '../SudokuRedux/selector';
 import { HardnessLevel } from '../Utility/SudokuUtils';
-import { startSolvingDiagonalMatrices } from '../NewRedux/Actions';
+import { startSolvingDiagonalMatrices } from '../SudokuRedux/actions';
 
 const arrowButtonsEventKey = [
   'ArrowUp',

@@ -1,5 +1,5 @@
 import { all, fork } from 'redux-saga/effects';
-import { sudokuSaga } from './NewRedux/saga';
+import { sudokuSaga } from './SudokuRedux/saga';
 
 function* rootSaga() {
   yield all([fork(sudokuSaga)]);
