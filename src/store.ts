@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 import SudokuReducer from './Redux';
 import { Sudoku } from './Redux/Reducer';
 import { Sudoku as NewSudokuTYpe } from './NewRedux';
-import sudokuReducer from './NewRedux/reducer';
+import sudokuReducer from './NewRedux/Reducer';
 
 import rootSaga from './rootSaga';
 
