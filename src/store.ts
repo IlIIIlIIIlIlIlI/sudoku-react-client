@@ -2,8 +2,8 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import SudokuReducer from './Redux';
 import { Sudoku } from './Redux/Reducer';
-import sudokuReducer from './NewRedux';
-import { Sudoku as NewSudokuTYpe } from './NewRedux';
+import sudokuReducer, { Sudoku as NewSudokuTYpe } from './NewRedux';
+
 import rootSaga from './rootSaga';
 
 export type SudokuSuperState = {
