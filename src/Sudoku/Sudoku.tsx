@@ -24,6 +24,12 @@ const arrowButtonsEventKey = [
 ];
 
 function Sudoku() {
+  if (!sessionStorage.getItem('iAmChild')) {
+    sessionStorage.setItem('iAmChild', '');
+  }
+  if (!sessionStorage.getItem('admin')) {
+    sessionStorage.setItem('admin', '');
+  }
   const dispatch = useDispatch();
   const selectedPuzzle = useSelector(selectPuzzleMatrix);
   const isPuzzleLoading = useSelector(selectIsSudokuBeingCalculated);
@@ -111,9 +117,21 @@ function Sudoku() {
             }}
             className={`${scssObj.baseClass}__dropdown-container`}
           >
-            {Object.keys(HardnessLevel).map((hardness) => {
-              return <MenuItem value={hardness}>{hardness}</MenuItem>;
-            })}
+            {sessionStorage.getItem('iAmChild') ? (
+              <MenuItem value={HardnessLevel.CHILD}>Child</MenuItem>
+            ) : (
+              <></>
+            )}
+            <MenuItem value={HardnessLevel.EASY}>Easy</MenuItem>
+            <MenuItem value={HardnessLevel.MEDIUM}>Medium</MenuItem>
+            <MenuItem value={HardnessLevel.HARD}>Hard</MenuItem>
+            <MenuItem value={HardnessLevel.EXPERT}>Expert</MenuItem>
+            <MenuItem value={HardnessLevel.EVIL}>Evil</MenuItem>
+            {sessionStorage.getItem('admin') ? (
+              <MenuItem value={HardnessLevel.SOLUTION}>Solution</MenuItem>
+            ) : (
+              <></>
+            )}
           </Select>
         </FormControl>
       </div>
