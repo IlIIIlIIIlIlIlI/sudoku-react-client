@@ -26,7 +26,12 @@ $base-class: sudoku-canvas;
   &__title {
     font-size: 35px;
     font-family: sans-serif;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+  }
+
+  &__dropdown {
+    background-color: white;
+    margin-bottom: 10px;
   }
 
   &__loader {

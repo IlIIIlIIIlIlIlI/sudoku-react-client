@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import SudokuCanvas from '../SudokuCanvas';
 import scssObj from './_Sudoku.scss';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import { FaGithub } from 'react-icons/fa';
@@ -27,12 +31,13 @@ function Sudoku() {
   const [isCalledInitially, setIsCalledInitially] = useState(true);
   const [horizontalIndex, setHorizontalIndex] = useState<number>(0);
   const [verticalIndex, setVerticalIndex] = useState<number>(0);
+  const [hardness, setHardness] = useState<HardnessLevel>(HardnessLevel.MEDIUM);
   const [focus, setFocus] = useState(
     `matrix[${horizontalIndex}][${verticalIndex}]`
   );
 
   if (isCalledInitially) {
-    dispatch(startSolvingDiagonalMatrices(HardnessLevel.CHILD));
+    dispatch(startSolvingDiagonalMatrices(HardnessLevel.MEDIUM));
     setIsCalledInitially(false);
   }
 
@@ -86,6 +91,33 @@ function Sudoku() {
   return (
     <div className={`${scssObj.baseClass}__container`}>
       <div className={`${scssObj.baseClass}__title`}>Sudoku Puzzle</div>
+
+      <div className={`${scssObj.baseClass}__dropdown`}>
+        <FormControl
+          fullWidth
+          className={`${scssObj.baseClass}__dropdown-container`}
+        >
+          <InputLabel>Hardness</InputLabel>
+          <Select
+            value={hardness}
+            label='Hardness'
+            onChange={(event: SelectChangeEvent) => {
+              setHardness(event.target.value as HardnessLevel);
+              dispatch(
+                startSolvingDiagonalMatrices(
+                  event.target.value as HardnessLevel
+                )
+              );
+            }}
+            className={`${scssObj.baseClass}__dropdown-container`}
+          >
+            {Object.keys(HardnessLevel).map((hardness) => {
+              return <MenuItem value={hardness}>{hardness}</MenuItem>;
+            })}
+          </Select>
+        </FormControl>
+      </div>
+
       <SudokuCanvas
         selectedPuzzle={selectedPuzzle}
         autoFocus={focus}
