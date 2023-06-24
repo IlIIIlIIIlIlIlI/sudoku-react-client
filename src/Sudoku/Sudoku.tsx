@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { getPuzzle, getSolution } from '../Redux';
-import { selectPuzzle } from '../Redux/Selector';
 import SudokuCanvas from '../SudokuCanvas';
 import scssObj from './_Sudoku.scss';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import { FaGithub } from 'react-icons/fa';
+import {
+  selectIsSudokuBeingCalculated,
+  selectPuzzleMatrix,
+  startSolvingDiagonalMatrices,
+} from '../NewRedux';
+import { HardnessLevel } from '../Utility/SudokuUtils';
 
 const arrowButtonsEventKey = [
   'ArrowUp',
@@ -18,36 +21,23 @@ const arrowButtonsEventKey = [
 
 function Sudoku() {
   const dispatch = useDispatch();
-  const selectedPuzzle = useSelector(selectPuzzle);
+  const selectedPuzzle = useSelector(selectPuzzleMatrix);
+  const isPuzzleLoading = useSelector(selectIsSudokuBeingCalculated);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isCalledInitially, setIsCalledInitially] = useState(true);
   const [horizontalIndex, setHorizontalIndex] = useState<number>(0);
   const [verticalIndex, setVerticalIndex] = useState<number>(0);
   const [focus, setFocus] = useState(
     `matrix[${horizontalIndex}][${verticalIndex}]`
   );
 
-  if (isLoading) {
-    setIsLoading(false);
-    axios
-      .get<number[][][]>(
-        'https://sudoku-puzzle-9x9-presolved-production-e691.up.railway.app/sudoku'
-      )
-      .then((response) => {
-        setIsLoading(false);
-        dispatch(getPuzzle({ matrix9x9: response.data[1] }));
-        dispatch(getSolution({ matrix9x9: response.data[0] }));
-        return response.data;
-      })
-      .catch(() => {
-        setIsLoading(false);
-      });
+  if (isCalledInitially) {
+    dispatch(startSolvingDiagonalMatrices(HardnessLevel.CHILD));
+    setIsCalledInitially(false);
   }
 
   useEffect(() => {
     const keyDownHandler = (event: any) => {
-      // console.log('User pressed: ', event.key);
-
       if (arrowButtonsEventKey.includes(event.key as string)) {
         const eventKey: string = event.key;
 
@@ -86,7 +76,7 @@ function Sudoku() {
     };
   }, [focus, horizontalIndex, verticalIndex]);
 
-  if (selectedPuzzle.length === 0)
+  if (isPuzzleLoading)
     return (
       <div className={`${scssObj.baseClass}__loader`}>
         <CircularProgress size={150} />
